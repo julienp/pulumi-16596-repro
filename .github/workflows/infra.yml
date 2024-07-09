@@ -58,7 +58,7 @@ jobs:
         run: |
           echo "pwd"
           pwd
-          echo "uname -"
+          echo "uname -a"
           uname -a
           echo "ldd --version"
           ldd --version
@@ -70,7 +70,5 @@ jobs:
           lscpu
           echo "cat /proc/meminfo"
           cat /proc/meminfo
-          echo "cat infra/out.txt"
-          cat infra/out.txt
           echo "tree"
           tree
