@@ -22,13 +22,13 @@ jobs:
         node -e 'console.log(v8.getHeapStatistics().heap_size_limit / 1024 / 1024)'
 
   node-20:
-    name: Node 18 Info
+    name: Node 20 Info
     runs-on: ubuntu-latest
     steps:
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 20
     - name: Nodejs heap size
       run: |
         echo "Node heap_size_limit"
