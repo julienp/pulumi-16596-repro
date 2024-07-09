@@ -1,0 +1,9 @@
+{
+  "name": "pulumi-16596-b",
+  "dependencies": {
+    "@types/node": "^20.14.10",
+    "typescript": "^5.5.3",
+    "@pulumi/azure-native": "^2.49.0",
+    "@pulumi/pulumi": "^3.122.0"
+  }
+}

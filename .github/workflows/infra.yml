@@ -1,0 +1,53 @@
+name: Infra
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  infra:
+    name: Infrastructure
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    defaults:
+      run:
+        working-directory: infra
+    env:
+      STACK: prod
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+          cache-dependency-path: infra/yarn.lock
+
+      - name: Yarn Install
+        run: yarn install --frozen-lockfile
+
+      - name: Pulumi Install
+        uses: pulumi/actions@v5
+        with:
+          pulumi-version-file: .versions/pulumi
+
+      - name: Pulumi Preview
+        uses: pulumi/actions@v5
+        with:
+          command: preview
+          stack-name: v-julien-pulumi-corp/pulumi-16596-repro/${{ env.STACK }}
+          refresh: true
+          work-dir: infra
+          pulumi-version-file: .versions/pulumi
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}

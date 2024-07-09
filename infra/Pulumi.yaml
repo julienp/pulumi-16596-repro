@@ -1,0 +1,5 @@
+name: pulumi-16596-repro
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
