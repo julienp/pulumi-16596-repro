@@ -2,36 +2,22 @@ import * as os from "node:os"
 import * as fs from "node:fs"
 import * as v8 from "node:v8"
 import * as pulumi from "@pulumi/pulumi";
+import * as az from "@pulumi/azure-native";
 
 console.log(v8.getHeapStatistics())
 
-const az = require("@pulumi/azure-native");
-
-console.log(v8.getHeapStatistics())
-
-function mb(n: number): number {
-  return Math.round(n / 1024 / 1024);
-}
-
-
-const out = fs.createWriteStream("out.txt", { flags: "a" })
-out.write(`RSS\t\tTotal\tFree\n`)
-out.end()
-console.log(`RSS\t\tTotal\tFree`)
-
+const out = fs.openSync("out.txt", "a")
 
 let i = 0
 let int = setInterval(() => {
-  const mem = process.memoryUsage();
-  const out = fs.createWriteStream("out.txt", { flags: "a" })
-  out.write(`${mb(mem.rss)}\t${mb(os.totalmem())}\t${mb(os.freemem())}\n`)
-  out.end()
-  console.log(`${mb(mem.rss)}\t${mb(os.totalmem())}\t${mb(os.freemem())}`)
-  console.log(v8.getHeapStatistics())
+  const stats = v8.getHeapStatistics()
+  console.log(stats.total_available_size - stats.used_heap_size)
+  fs.writeSync(out, `${stats.heap_size_limit - stats.used_heap_size}\n`)
+  fs.fsyncSync(out)
   i++
   if (i > 5) {
     clearInterval(int)
-    out.end()
+    fs.closeSync(out)
   }
 }, 2000)
 
