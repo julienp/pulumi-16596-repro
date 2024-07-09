@@ -3,3 +3,4 @@ runtime:
   name: nodejs
   options:
     packagemanager: npm
+    nodeargs: --max-old-space-size=4096
