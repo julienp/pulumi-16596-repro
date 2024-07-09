@@ -55,8 +55,17 @@ jobs:
       - name: Debug Info
         if: always()
         run: |
+          echo "uname -"
           uname -a
+          echo "ldd --version"
           ldd --version
+          echo "file /opt/hostedtoolcache/node/20.15.0/x64/bin/node"
           file /opt/hostedtoolcache/node/20.15.0/x64/bin/node
+          echo "ldd /opt/hostedtoolcache/node/20.15.0/x64/bin/node"
           ldd /opt/hostedtoolcache/node/20.15.0/x64/bin/node
+          echo "cat out.txt"
           cat out.txt
+          echo "lscpu"
+          lscpu
+          echo "cat /proc/meminfo"
+          cat /proc/meminfo

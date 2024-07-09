@@ -7,7 +7,7 @@ function mb(n: number): number {
   return Math.round(n / 1024 / 1024);
 }
 
-const out = fs.createWriteStream("out.txt")
+const out = fs.createWriteStream("out.txt", { flags: "a" })
 
 out.write(`RSS\t\tTotal\tFree\n`)
 console.log(`RSS\t\tTotal\tFree`)
