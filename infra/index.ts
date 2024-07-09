@@ -23,3 +23,5 @@ const site = new az.web.StaticSite("app", {
 export const resourceGroupId = resourceGroup.id;
 export const appName = site.name;
 export const scmProvider = site.provider;
+
+// dummy change
