@@ -70,3 +70,5 @@ jobs:
           lscpu
           echo "cat /proc/meminfo"
           cat /proc/meminfo
+          echo "cat out.txt"
+          cat /home/runner/work/pulumi-16596-repro/pulumi-16596-repro/infra || true
