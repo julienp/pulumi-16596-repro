@@ -42,4 +42,4 @@ export const resourceGroupId = resourceGroup.id;
 export const appName = site.name;
 export const scmProvider = site.provider;
 
-// dummy change
+// dummy change 2
