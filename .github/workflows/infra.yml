@@ -26,8 +26,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          # cache: yarn
-          # cache-dependency-path: infra/yarn.lock
+          cache: yarn
+          cache-dependency-path: infra/yarn.lock
 
       - name: Yarn Install
         run: yarn install --frozen-lockfile
