@@ -1,0 +1,31 @@
+diff --git a/node_modules/@pulumi/pulumi/cmd/run/index.js b/node_modules/@pulumi/pulumi/cmd/run/index.js
+index 96e2897..d2c7f40 100644
+--- a/node_modules/@pulumi/pulumi/cmd/run/index.js
++++ b/node_modules/@pulumi/pulumi/cmd/run/index.js
+@@ -84,7 +84,7 @@ process.on("exit", (code) => {
+ // fact.  For example, we want to keep track of ScriptId->FileNames so that we can appropriately
+ // report errors for Functions we cannot serialize.  This can only be done (up to Node11 at least)
+ // by register to hear about scripts being parsed.
+-const v8Hooks = __importStar(require("../../runtime/closure/v8Hooks"));
++// const v8Hooks = __importStar(require("../../runtime/closure/v8Hooks"));
+ // This is the entrypoint for running a Node.js program with minimal scaffolding.
+ const minimist_1 = __importDefault(require("minimist"));
+ function usage() {
+@@ -152,7 +152,7 @@ function main(args) {
+     addToEnvIfDefined("PULUMI_NODEJS_ENGINE", argv["engine"]);
+     addToEnvIfDefined("PULUMI_NODEJS_SYNC", argv["sync"]);
+     // Ensure that our v8 hooks have been initialized.  Then actually load and run the user program.
+-    v8Hooks.isInitializedAsync().then(() => {
++    // v8Hooks.isInitializedAsync().then(() => {
+         const promise = require("./run").run(argv, 
+         /*programStarted:   */ () => {
+             programRunning = true;
+@@ -168,7 +168,7 @@ function main(args) {
+         promise.then(() => {
+             programRunning = false;
+         });
+-    });
++    // });
+ }
+ function addToEnvIfDefined(key, value) {
+     if (value) {
