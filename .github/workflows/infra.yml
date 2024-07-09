@@ -71,4 +71,4 @@ jobs:
           echo "cat /proc/meminfo"
           cat /proc/meminfo
           echo "tree"
-          cd .. && tree --gitignore
+          tree --gitignore ..
