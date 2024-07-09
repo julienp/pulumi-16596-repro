@@ -1,5 +1,23 @@
+import * as os from "node:os"
 import * as az from "@pulumi/azure-native";
 import * as pulumi from "@pulumi/pulumi";
+
+function mb(n: number): number {
+  return Math.round(n / 1024 / 1024);
+}
+
+console.log(`RSS\t\tTotal\tFree`)
+
+let i = 0
+let int = setInterval(() => {
+  const mem = process.memoryUsage();
+  console.log(`${mb(mem.rss)}\t${mb(os.totalmem())}\t${mb(os.freemem())}`)
+  i++
+  if (i > 90) {
+    clearInterval(int)
+  }
+}, 1000)
+
 
 const stack = pulumi.getStack().toUpperCase();
 const resourceGroup = new az.resources.ResourceGroup("rg", {
