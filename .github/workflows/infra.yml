@@ -8,6 +8,32 @@ on:
     branches: [main]
 
 jobs:
+  node-18:
+    name: Node 18 Info
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Nodejs heap size
+      run: |
+        echo "Node heap_size_limit"
+        node -e 'console.log(v8.getHeapStatistics().heap_size_limit / 1024 / 1024)'
+
+  node-20:
+    name: Node 18 Info
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Nodejs heap size
+      run: |
+        echo "Node heap_size_limit"
+        node -e 'console.log(v8.getHeapStatistics().heap_size_limit / 1024 / 1024)'
+
   infra:
     name: Infrastructure
     runs-on: ubuntu-latest
