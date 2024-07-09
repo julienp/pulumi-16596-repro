@@ -6,18 +6,18 @@ import * as az from "@pulumi/azure-native";
 
 console.log(v8.getHeapStatistics())
 
-const out = fs.openSync("out.txt", "a")
 
 let i = 0
 let int = setInterval(() => {
   const stats = v8.getHeapStatistics()
-  console.log(stats.total_available_size - stats.used_heap_size)
+  console.log(stats.heap_size_limit - stats.used_heap_size)
+  const out = fs.openSync("out.txt", "a")
   fs.writeSync(out, `${stats.heap_size_limit - stats.used_heap_size}\n`)
   fs.fsyncSync(out)
+  fs.closeSync(out)
   i++
   if (i > 5) {
     clearInterval(int)
-    fs.closeSync(out)
   }
 }, 2000)
 
