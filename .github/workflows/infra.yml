@@ -38,6 +38,11 @@ jobs:
         with:
           pulumi-version-file: .versions/pulumi
 
+      - name: Nodejs Default heap size
+        run: |
+          echo "Node heap_size_limit"
+          node -e 'console.log(v8.getHeapStatistics().heap_size_limit / 1024 / 1024)'
+
       - name: Pulumi Preview
         uses: pulumi/actions@v5
         with:
