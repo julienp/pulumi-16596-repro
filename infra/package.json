@@ -8,7 +8,5 @@
     "postinstall-postinstall": "^2.1.0",
     "typescript": "^5.5.3"
   },
-  "scripts": {
-    "postinstall": "patch-package"
-  }
+  "scripts": {}
 }
